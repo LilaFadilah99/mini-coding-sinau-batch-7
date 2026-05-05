@@ -1,0 +1,20 @@
+{
+  "name": "wanderwise-ai",
+  "version": "1.0.0",
+  "description": "AI-powered travel itinerary planner with secure backend",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "travel",
+    "ai",
+    "itinerary",
+    "gemini"
+  ],
+  "author": "Lila Fadila Kusuma",
+  "license": "MIT",
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  }
+}

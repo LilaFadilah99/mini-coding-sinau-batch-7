@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Waypoint AI - Smart Travel Planning</title>
+
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="Waypoint AI - Your intelligent travel companion. Get AI-powered itineraries for your dream destinations." />
+    <meta name="keywords" content="travel, AI, itinerary, trip planner, vacation" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css?v=2.0" />
+  </head>
+
+  <body>
+    <!-- ============================================
+         TOP NAVIGATION BAR (3-Part Floating Design)
+         ============================================ -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <!-- Part 1: Logo & Name (Left) -->
+        <a href="#" class="nav-brand">
+          <span class="brand-icon">⛰️</span>
+          <span class="brand-text">Waypoint Travel</span>
+        </a>
+
+        <!-- Part 2: Navigation Links (Center) -->
+        <ul class="nav-menu">
+          <li><a href="#" class="nav-link active" data-view="explore">Destinations</a></li>
+          <li><a href="#" class="nav-link" data-view="saved">My Trips</a></li>
+        </ul>
+
+        <!-- Part 3: AI Planner Button (Right) -->
+        <div class="nav-actions">
+          <button class="btn-ai-planner" id="btn-open-planner">AI Planner</button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero" id="hero">
+      <div class="hero-background">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=80" alt="Beautiful tropical beach" class="hero-image" />
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        <h1 class="hero-title">Explore the World, One<br />Journey at a Time.</h1>
+        <p class="hero-subtitle">AI-powered itineraries crafted just for you. Explore smarter, travel better.</p>
+      </div>
+
+      <!-- Floating Search/Planner Card -->
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <h2 class="hero-card-heading">Plan Your Travel Journey</h2>
+        </div>
+
+        <form class="hero-form" id="quick-planner-form">
+          <!-- Main Input Row - 4 inputs horizontal -->
+          <div class="hero-form-inputs">
+            <div class="form-field">
+              <label>Destination</label>
+              <input type="text" id="hero-destination" placeholder="Type the destination" required />
+            </div>
+            <div class="form-field">
+              <label>Days</label>
+              <input type="number" id="hero-days" placeholder="3" min="1" max="14" value="3" required />
+            </div>
+            <div class="form-field">
+              <label>Budget</label>
+              <select id="hero-budget" required>
+                <option value="budget">Budget</option>
+                <option value="moderate" selected>Moderate</option>
+                <option value="luxury">Luxury</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Interests</label>
+              <input type="text" id="hero-interests" placeholder="Your interests" />
+            </div>
+          </div>
+
+          <!-- Filter and Button Row - Space between -->
+          <div class="filter-button-row">
+            <!-- Filter Pills with borders -->
+            <div class="filter-section">
+              <span class="filter-label">Filter:</span>
+              <div class="filter-pills">
+                <button type="button" class="filter-pill" data-destination="Bali">Bali</button>
+                <button type="button" class="filter-pill" data-destination="Tokyo">Tokyo</button>
+                <button type="button" class="filter-pill" data-destination="Paris">Paris</button>
+                <button type="button" class="filter-pill" data-destination="New York">New York</button>
+                <button type="button" class="filter-pill" data-destination="Dubai">Dubai</button>
+                <button type="button" class="filter-pill" data-destination="London">London</button>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-generate-hero" id="btn-generate-hero">
+              <span class="btn-text">Generate Itinerary</span>
+              <span class="btn-loading">Generating...</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================
+         MAIN CONTENT
+         ============================================ -->
+    <main class="main-content">
+      <!-- ========== EXPLORE VIEW ========== -->
+      <section id="explore-view" class="view active">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Popular destination</h2>
+            <p class="section-subtitle">Discover the most loved destinations by travelers worldwide</p>
+          </div>
+        </div>
+
+        <!-- Destination cards will be rendered here by JavaScript -->
+        <div id="destinations-grid" class="destinations-grid">
+          <!-- Cards rendered by JS -->
+        </div>
+      </section>
+
+      <!-- ========== SAVED TRIPS VIEW ========== -->
+      <section id="saved-view" class="view">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">My Saved Trips</h2>
+            <p class="section-subtitle">Your travel planning history</p>
+          </div>
+        </div>
+
+        <!-- Saved trips will be rendered here -->
+        <div id="saved-trips-list" class="saved-trips-list">
+          <!-- Trips rendered by JS -->
+        </div>
+
+        <!-- Empty State (shown when no trips saved) -->
+        <div id="empty-state" class="empty-state">
+          <span class="empty-icon">🗺️</span>
+          <h3>No saved trips yet</h3>
+          <p>Start planning your adventure with our AI Planner!</p>
+          <button class="btn-primary" id="empty-start-planning">✨ Start Planning</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================================
+         STATS SECTION
+         ============================================ -->
+    <section class="stats-section">
+      <div class="container">
+        <h2 class="stats-title">Get to know more<br />about Waypoint Travel</h2>
+        <p class="stats-subtitle">With a commitment to security and efficiency, our services ensure your travel planning is seamless and secure.</p>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3 class="stat-number">234<span class="stat-suffix">M</span></h3>
+            <p class="stat-label">Supporting multiple<br />currencies for travelers</p>
+          </div>
+          <div class="stat-card stat-highlight">
+            <h3 class="stat-number">768<span class="stat-suffix">K</span></h3>
+            <p class="stat-label">Gaining new travelers<br />every single month</p>
+          </div>
+          <div class="stat-card">
+            <h3 class="stat-number">5.0<span class="stat-suffix">★</span></h3>
+            <p class="stat-label">High star ratings from<br />satisfied users</p>
+          </div>
+          <div class="stat-card">
+            <h3 class="stat-number">$8.8<span class="stat-suffix">B</span></h3>
+            <p class="stat-label">Generating increased<br />revenue consistently</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         EXPLORE EVENTS SECTION
+         ============================================ -->
+    <section class="events-section">
+      <div class="container">
+        <div class="events-header">
+          <h2 class="section-title">Explore events</h2>
+        </div>
+
+        <div class="events-grid">
+          <!-- Event Card 1 -->
+          <div class="event-card">
+            <div class="event-image">
+              <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80" alt="City adventure" />
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">Exploring the Hidden Wonders of the World Adventure</h3>
+              <div class="event-meta">
+                <span class="event-location">📍 Bangladesh</span>
+                <span class="event-date">📅 July 3 to 7</span>
+                <span class="event-rating">⭐ 4.8 Rating</span>
+              </div>
+              <div class="event-footer">
+                <div class="event-price">
+                  <span class="price-amount">$400</span>
+                  <span class="price-period">/ Night</span>
+                </div>
+              </div>
+              <p class="event-note">Including taxes and fees</p>
+            </div>
+          </div>
+
+          <!-- Event Card 2 -->
+          <div class="event-card">
+            <div class="event-image">
+              <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&q=80" alt="Mountain adventure" />
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">Embark on a Cultural Journey Across Stunning Landscapes</h3>
+              <div class="event-meta">
+                <span class="event-location">📍 Bangladesh</span>
+                <span class="event-date">📅 July 10 to 12</span>
+                <span class="event-rating">⭐ 4.8 Rating</span>
+              </div>
+              <div class="event-footer">
+                <div class="event-price">
+                  <span class="price-amount">$320</span>
+                  <span class="price-period">/ Night</span>
+                </div>
+              </div>
+              <p class="event-note">Including taxes and fees</p>
+            </div>
+          </div>
+
+          <!-- Event Card 3 -->
+          <div class="event-card">
+            <div class="event-image">
+              <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80" alt="Road trip" />
+            </div>
+            <div class="event-content">
+              <h3 class="event-title">Discover Majestic Mountains and Breathtaking Views</h3>
+              <div class="event-meta">
+                <span class="event-location">📍 Bangladesh</span>
+                <span class="event-date">📅 July 3 to 7</span>
+                <span class="event-rating">⭐ 4.8 Rating</span>
+              </div>
+              <div class="event-footer">
+                <div class="event-price">
+                  <span class="price-amount">$450</span>
+                  <span class="price-period">/ Night</span>
+                </div>
+              </div>
+              <p class="event-note">Including taxes and fees</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         CLIENT REVIEWS SECTION
+         ============================================ -->
+    <section class="reviews-section">
+      <div class="container">
+        <div class="reviews-header">
+          <h2 class="section-title">Client review</h2>
+          <div class="reviews-avatars">
+            <img src="https://i.pravatar.cc/40?img=1" alt="Client" class="review-avatar" />
+            <img src="https://i.pravatar.cc/40?img=2" alt="Client" class="review-avatar" />
+            <img src="https://i.pravatar.cc/40?img=3" alt="Client" class="review-avatar" />
+            <img src="https://i.pravatar.cc/40?img=4" alt="Client" class="review-avatar" />
+          </div>
+        </div>
+
+        <div class="reviews-content">
+          <div class="review-card">
+            <div class="review-quote">"</div>
+            <p class="review-text">Working with this team was a pleasure. They understood our vision and helped us find a property that exceeded our expectations. We couldn't have done it without them!</p>
+            <div class="review-author">
+              <div class="author-info">
+                <h4 class="author-name">Sajibur Rahman</h4>
+                <p class="author-role">UI UX Designer</p>
+              </div>
+            </div>
+            <div class="review-dots">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+
+          <div class="review-image">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Reviewer" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+         CTA HERO SECTION (Before Footer)
+         ============================================ -->
+    <section class="cta-hero">
+      <div class="cta-background">
+        <img src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=1600&q=80" alt="Adventure landscape" class="cta-image" />
+        <div class="cta-overlay"></div>
+      </div>
+      <div class="cta-content">
+        <h2 class="cta-title">Discover the World, One<br />Adventure at a Time</h2>
+        <p class="cta-subtitle">Travel Beyond Limits, Explore Uncharted Horizons, and Build Memories That Last a Lifetime</p>
+        <button class="btn-cta">
+          Get Started
+          <span class="cta-arrow">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============================================
+         AI PLANNER MODAL (Floating Overlay)
+         ============================================ -->
+    <div class="modal-overlay" id="planner-modal">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h2>AI Travel Planner</h2>
+          <button class="modal-close" id="modal-close">×</button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Planner Form -->
+          <div class="planner-form-container" id="planner-form-container">
+            <p class="modal-subtitle">Let our AI create your perfect personalized itinerary</p>
+
+            <form id="planner-form">
+              <div class="form-group">
+                <label for="destination">Destination</label>
+                <input type="text" id="destination" placeholder="e.g., Bali, Tokyo, Paris..." required />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="days">Days</label>
+                  <input type="number" id="days" min="1" max="14" value="3" required />
+                </div>
+                <div class="form-group">
+                  <label for="budget">Budget</label>
+                  <select id="budget" required>
+                    <option value="budget">Budget</option>
+                    <option value="moderate" selected>Moderate</option>
+                    <option value="luxury">Luxury</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="interests">Interests</label>
+                <input type="text" id="interests" placeholder="e.g., food, culture, adventure, beaches..." />
+              </div>
+
+              <button type="submit" class="btn-generate" id="btn-generate">
+                <span class="btn-text">Generate Itinerary</span>
+                <span class="btn-loading">Magic is happening... 🪄</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Result Display Container -->
+          <div id="result-container" class="result-container hidden">
+            <div class="result-header">
+              <h3>Your Itinerary</h3>
+              <div class="result-actions">
+                <button id="btn-save" class="btn-save">💾 Save</button>
+                <button id="btn-new" class="btn-outline-sm">+ New</button>
+              </div>
+            </div>
+            <div id="itinerary-result" class="itinerary-result">
+              <!-- AI generated itinerary will appear here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="brand-icon">⛰️</span>
+          <span>Waypoint AI</span>
+        </div>
+        <p class="footer-text">Made with ❤️ for learning web development</p>
+      </div>
+    </footer>
+
+    <!-- ============================================
+         LOADING OVERLAY
+         ============================================ -->
+    <div class="loader-overlay" id="loader-overlay">
+      <div class="loader-content">
+        <div class="spinner"></div>
+        <p class="loader-text">Waypoint AI is crafting your journey...</p>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+  </body>
+</html>
