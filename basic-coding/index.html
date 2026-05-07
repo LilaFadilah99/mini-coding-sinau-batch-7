@@ -19,10 +19,23 @@
           <span class="navbar__logo-text">Waypoint Travel</span>
         </a>
 
-        <nav class="navbar__nav" aria-label="Main navigation">
-          <a href="#destinations" class="navbar__link is-active">Destinations</a>
-          <a href="#my-trips" class="navbar__link">My Trips</a>
+        <nav class="navbar__nav nav-menu" aria-label="Main navigation">
+          <a href="#destinations" class="navbar__link nav-link is-active"
+            >Destinations</a
+          >
+          <a href="#my-trips" class="navbar__link nav-link">My Trips</a>
         </nav>
+
+        <button
+          type="button"
+          id="mobile-menu-btn"
+          class="navbar__hamburger"
+          aria-label="Toggle menu"
+        >
+          <span class="navbar__hamburger-line"></span>
+          <span class="navbar__hamburger-line"></span>
+          <span class="navbar__hamburger-line"></span>
+        </button>
 
         <a href="#planner" class="navbar__cta">AI Planner</a>
       </div>
@@ -38,7 +51,175 @@
           AI-powered itineraries crafted just for you. Explore smarter, travel
           better.
         </p>
+
+        <form class="planner" novalidate>
+          <h2 class="planner__title">Plan Your Travel Journey</h2>
+
+          <div class="planner__grid">
+            <div class="planner__field">
+              <label for="planner-destination" class="planner__label"
+                >Destination</label
+              >
+              <input
+                type="text"
+                id="planner-destination"
+                class="planner__input"
+                placeholder="Type the destination"
+                required
+              />
+            </div>
+
+            <div class="planner__field">
+              <label for="planner-days" class="planner__label">Days</label>
+              <input
+                type="number"
+                id="planner-days"
+                class="planner__input"
+                min="1"
+                max="14"
+                value="3"
+                required
+              />
+            </div>
+
+            <div class="planner__field">
+              <label for="planner-budget" class="planner__label">Budget</label>
+              <select
+                id="planner-budget"
+                class="planner__input planner__select"
+                required
+              >
+                <option value="budget">Budget</option>
+                <option value="moderate" selected>Moderate</option>
+                <option value="luxury">Luxury</option>
+              </select>
+            </div>
+
+            <div class="planner__field">
+              <label for="planner-interests" class="planner__label"
+                >Interests</label
+              >
+              <input
+                type="text"
+                id="planner-interests"
+                class="planner__input"
+                placeholder="Your interests"
+              />
+            </div>
+          </div>
+
+          <div class="planner__bottom">
+            <div class="planner__filters">
+              <span class="planner__filters-label">Filter:</span>
+              <button type="button" class="planner__chip">Bali</button>
+              <button type="button" class="planner__chip">Tokyo</button>
+              <button type="button" class="planner__chip">Paris</button>
+              <button type="button" class="planner__chip">New York</button>
+              <button type="button" class="planner__chip">Dubai</button>
+              <button type="button" class="planner__chip">London</button>
+            </div>
+
+            <button type="submit" class="planner__submit">
+              Generate Itinerary
+            </button>
+          </div>
+        </form>
       </div>
     </section>
+
+    <section class="destinations" id="destinations">
+      <div class="destinations__inner">
+        <header class="destinations__header">
+          <h2 class="destinations__title">Popular destination</h2>
+          <p class="destinations__subtitle">
+            Discover the most loved destinations by travelers worldwide
+          </p>
+        </header>
+
+        <div class="destinations__grid">
+          <article class="dest-card">
+            <div class="dest-card__media">
+              <img
+                src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80"
+                alt="Bali, Indonesia"
+                class="dest-card__image"
+                loading="lazy"
+              />
+              <span class="dest-card__tag">🏝️ Tropical</span>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__info">
+                <p class="dest-card__route">Your City → Bali</p>
+                <h3 class="dest-card__name">Bali, Indonesia</h3>
+                <p class="dest-card__cta">Explore with AI Planner</p>
+              </div>
+              <p class="dest-card__footer">From <strong>AI Trip</strong></p>
+            </div>
+          </article>
+
+          <article class="dest-card">
+            <div class="dest-card__media">
+              <img
+                src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80"
+                alt="Tokyo, Japan"
+                class="dest-card__image"
+                loading="lazy"
+              />
+              <span class="dest-card__tag">🏙️ Urban</span>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__info">
+                <p class="dest-card__route">Your City → Tokyo</p>
+                <h3 class="dest-card__name">Tokyo, Japan</h3>
+                <p class="dest-card__cta">Explore with AI Planner</p>
+              </div>
+              <p class="dest-card__footer">From <strong>AI Trip</strong></p>
+            </div>
+          </article>
+
+          <article class="dest-card">
+            <div class="dest-card__media">
+              <img
+                src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&q=80"
+                alt="Paris, France"
+                class="dest-card__image"
+                loading="lazy"
+              />
+              <span class="dest-card__tag">🗼 Romantic</span>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__info">
+                <p class="dest-card__route">Your City → Paris</p>
+                <h3 class="dest-card__name">Paris, France</h3>
+                <p class="dest-card__cta">Explore with AI Planner</p>
+              </div>
+              <p class="dest-card__footer">From <strong>AI Trip</strong></p>
+            </div>
+          </article>
+
+          <article class="dest-card">
+            <div class="dest-card__media">
+              <img
+                src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=800&q=80"
+                alt="Iceland"
+                class="dest-card__image"
+                loading="lazy"
+              />
+              <span class="dest-card__tag">❄️ Adventure</span>
+            </div>
+            <div class="dest-card__body">
+              <div class="dest-card__info">
+                <p class="dest-card__route">Your City → Iceland</p>
+                <h3 class="dest-card__name">Iceland</h3>
+                <p class="dest-card__cta">Explore with AI Planner</p>
+              </div>
+              <p class="dest-card__footer">From <strong>AI Trip</strong></p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <script src="js/app.js" defer></script>
   </body>
 </html>

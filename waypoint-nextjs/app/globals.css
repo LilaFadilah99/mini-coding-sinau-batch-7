@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   shadcn/ui CSS Variables (HSL format untuk Tailwind v3)
+   --primary & --accent override jadi Waypoint brand green
+   biar shadcn components otomatis match Waypoint vibe
+   ============================================ */
+@layer base {
+  :root {
+    /* Layout & form */
+    --background: 0 0% 100%;
+    --foreground: 215 25% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 17%;
+    --border: 215 14% 90%;
+    --input: 215 14% 90%;
+    --ring: 99 100% 70%;
+
+    /* PRIMARY = Waypoint accent green (#8bff66) */
+    --primary: 99 100% 70%;
+    --primary-foreground: 0 0% 10%;
+
+    /* SECONDARY (muted gray) */
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 215 25% 17%;
+
+    /* MUTED (subtle background) */
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 14% 45%;
+
+    /* shadcn ACCENT — pakai light green biar match brand */
+    --accent: 99 100% 92%;
+    --accent-foreground: 215 25% 17%;
+
+    /* DESTRUCTIVE (untuk delete buttons, dll) */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Border radius scale */
+    --radius: 0.625rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    line-height: 1.6;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  input,
+  select {
+    font-family: inherit;
+  }
+}
+
+/* ============================================
+   Hero Overlay Gradient
+   (Kompleks 3-stop, lebih clean tulis CSS)
+   ============================================ */
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.cta-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+/* ============================================
+   Itinerary Content Styling
+   (AI return HTML via innerHTML, butuh class CSS biasa)
+   ============================================ */
+.itinerary-result {
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.itinerary-result h1,
+.itinerary-result .itinerary-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #8bff66;
+}
+
+.itinerary-result h2,
+.itinerary-result .itinerary-section {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 20px 0 12px;
+  padding: 10px 14px;
+  background: #f1f5f9;
+  border-radius: 6px;
+  border-left: 3px solid #8bff66;
+}
+
+.itinerary-result h3,
+.itinerary-result .itinerary-day {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 20px 0 12px;
+  padding: 12px 16px;
+  background: #8bff66;
+  border-radius: 6px;
+}
+
+.itinerary-result h3:first-child {
+  margin-top: 0;
+}
+
+.itinerary-result ul,
+.itinerary-result .itinerary-list {
+  padding: 0;
+  margin: 0 0 16px;
+  list-style: none;
+}
+
+.itinerary-result ul li {
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border-left: 2px solid #e2e8f0;
+  color: #64748b;
+  transition: 0.15s ease;
+}
+
+.itinerary-result ul li:hover {
+  border-left-color: #8bff66;
+  background: #f1f5f9;
+}
+
+.itinerary-result ul li strong {
+  color: #1e293b;
+}
+
+.itinerary-result p,
+.itinerary-result .itinerary-text {
+  margin-bottom: 12px;
+  color: #64748b;
+}
+
+.itinerary-result hr,
+.itinerary-result .itinerary-divider {
+  border: none;
+  height: 1px;
+  background: #e2e8f0;
+  margin: 20px 0;
+}
+
+.itinerary-result strong {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+/* Saved trip content (preview, max-height with fade) */
+.saved-trip-content {
+  max-height: 150px;
+  overflow: hidden;
+  position: relative;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.saved-trip-content::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(transparent, white);
+}

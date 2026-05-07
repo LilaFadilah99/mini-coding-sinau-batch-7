@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DOM Demo</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      #output {
+        margin-top: 10px;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="judul">Halo, Dunia!</h1>
+    <button id="ubah">Ubah Judul</button>
+    <button id="tambah">Tambah Paragraf</button>
+    <button id="hapus">Hapus Paragraf</button>
+
+    <div id="output"></div>
+
+    <script>
+      // Akses element
+      const judul = document.getElementById("judul");
+      const output = document.getElementById("output");
+
+      //   Event : aksi untuk merubah isi elemn html
+      document.getElementById("ubah").addEventListener("click", () => {
+        judul.textContent = "Judul Sudah Diubah!";
+      });
+
+      // Event untuk tambah element
+      document.getElementById("tambah").addEventListener("click", () => {
+        const p = document.createElement("p");
+        p.textContent = "Paragraf baru ditambahkan";
+        p.className = "paragraf";
+        output.appendChild(p);
+      });
+    </script>
+  </body>
+</html>

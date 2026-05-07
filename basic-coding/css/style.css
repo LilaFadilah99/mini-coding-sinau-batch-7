@@ -174,6 +174,108 @@ button {
   }
 }
 
+/* --- Hamburger button (mobile only) --- */
+
+.navbar__hamburger {
+  display: none; /* default hidden, hanya muncul di mobile */
+  width: 44px;
+  height: 44px;
+  position: relative;
+  background: #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  pointer-events: auto;
+  padding: 0;
+}
+
+.navbar__hamburger-line {
+  position: absolute;
+  left: 50%;
+  width: 18px;
+  height: 2px;
+  background: #1e293b;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: top 0.3s ease, transform 0.3s ease, opacity 0.2s ease;
+}
+
+.navbar__hamburger-line:nth-child(1) {
+  top: calc(50% - 6px);
+}
+
+.navbar__hamburger-line:nth-child(2) {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.navbar__hamburger-line:nth-child(3) {
+  top: calc(50% + 6px);
+}
+
+/* Active state: 3 garis berubah jadi X */
+.navbar__hamburger.active .navbar__hamburger-line:nth-child(1) {
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.navbar__hamburger.active .navbar__hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar__hamburger.active .navbar__hamburger-line:nth-child(3) {
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* --- Mobile (≤768px): tukar nav pill jadi drawer + munculin hamburger --- */
+
+@media (max-width: 768px) {
+  .navbar__hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Nav pill di mobile: default hidden, jadi drawer pas mobile-active */
+  .navbar__nav {
+    display: none;
+    position: fixed;
+    top: 76px;
+    left: 16px;
+    right: 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px;
+    border-radius: 24px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  }
+
+  .navbar__nav.mobile-active {
+    display: flex;
+    animation: navMenuSlideDown 0.25s ease;
+  }
+
+  /* Link di drawer: lebih lebar & teks lebih besar */
+  .navbar__link {
+    padding: 14px 20px;
+    font-size: 15px;
+    text-align: center;
+  }
+}
+
+@keyframes navMenuSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ============================================
    HERO
    ============================================ */
@@ -229,5 +331,330 @@ button {
   .hero {
     min-height: 520px;
     padding: 160px 20px 100px;
+  }
+}
+
+/* ============================================
+   PLANNER CARD (form di hero)
+   ============================================ */
+
+.planner {
+  margin-top: 56px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 32px 40px;
+  text-align: left;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.18),
+    0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.planner__title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 24px;
+}
+
+.planner__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.planner__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.planner__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.planner__input {
+  width: 100%;
+  padding: 12px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e293b;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.planner__input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.planner__input:focus {
+  border-color: #8bff66;
+  box-shadow: 0 0 0 4px rgba(139, 255, 102, 0.2);
+}
+
+/* Hide native number spinner */
+.planner__input[type="number"]::-webkit-inner-spin-button,
+.planner__input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.planner__input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Custom select arrow */
+.planner__select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path fill='%2394a3b8' d='M3 4.5l3 3 3-3z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+/* Bottom row: filters + submit */
+.planner__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.planner__filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.planner__filters-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-right: 4px;
+}
+
+.planner__chip {
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+  background: transparent;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.planner__chip:hover {
+  border-color: #cbd5e1;
+  color: #1e293b;
+  background: #f8fafc;
+}
+
+.planner__submit {
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0a0a0a;
+  background: #8bff66;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.planner__submit:hover {
+  background: #76e055;
+  box-shadow: 0 8px 24px rgba(139, 255, 102, 0.45);
+  transform: translateY(-2px);
+}
+
+/* Responsive: tablet → 2 cols, mobile → 1 col */
+@media (max-width: 1023px) {
+  .planner__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .planner {
+    padding: 24px;
+  }
+
+  .planner__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planner__bottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .planner__submit {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   POPULAR DESTINATIONS
+   ============================================ */
+
+.destinations {
+  padding: 96px 24px;
+  background: #ffffff;
+  scroll-margin-top: 80px;
+}
+
+.destinations__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.destinations__header {
+  margin-bottom: 48px;
+}
+
+.destinations__title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.destinations__subtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #64748b;
+}
+
+.destinations__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* --- Card --- */
+.dest-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.dest-card:hover {
+  transform: translateY(-6px);
+  border-color: #cbd5e1;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+}
+
+.dest-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+
+.dest-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.dest-card:hover .dest-card__image {
+  transform: scale(1.06);
+}
+
+.dest-card__tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.dest-card__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  padding: 24px;
+  gap: 24px;
+}
+
+.dest-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dest-card__route {
+  font-size: 13px;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.dest-card__name {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1e293b;
+}
+
+.dest-card__cta {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.dest-card__footer {
+  font-size: 14px;
+  color: #64748b;
+}
+
+.dest-card__footer strong {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .destinations__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .destinations {
+    padding: 64px 20px;
+  }
+
+  .destinations__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
